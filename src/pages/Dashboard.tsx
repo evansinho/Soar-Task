@@ -1,9 +1,10 @@
 const Dashboard = () => {
-    return (
-      <div className="flex justify-center items-center h-screen text-2xl">
-        Dashboard Page
-      </div>
-    );
-  };
-  
+  return (
+    <div className="p-6">
+      <h1 className="text-3xl font-bold">Dashboard</h1>
+      <p className="mt-4">Welcome to the Dashboard!</p>
+    </div>
+  );
+};
+
 export default Dashboard;
