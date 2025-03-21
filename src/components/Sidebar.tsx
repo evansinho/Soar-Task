@@ -36,7 +36,7 @@ interface NavLinkProps {
 const NavLink = ({ to, icon, label, active, onClick }: NavLinkProps) => (
   <Link to={to} onClick={onClick} className={`flex items-center p-2 rounded ${active ? 'text-[#232323]' : 'text-[#B1B1B1]'} hover:bg-gray-700`}>
     <img src={icon} className="logo mr-2 inline" alt={`${label} Icon`} />
-    <span className="ml-2 text-xl mt-1">{label}</span>
+    <span className="ml-2 text-sm md:text-sm lg:text-xl mt-1">{label}</span>
   </Link>
 );
 
@@ -49,11 +49,11 @@ const Sidebar = () => {
       <button className="md:hidden p-4 fixed top-4 left-4" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
         <img src={hamburgerIcon} alt="Menu" />
       </button>
-      <aside className={`w-64 h-screen bg-white text-white p-6 fixed md:relative ${isSidebarOpen ? 'block' : 'hidden'} md:block`}>
+      <aside className={`w-64 h-screen border border-gray-200 border-t-0 bg-white text-white p-6 fixed md:relative ${isSidebarOpen ? 'block' : 'hidden'} md:block`} style={{zIndex: 1000 }}>
         <div className="flex items-center justify-between p-1.5 mb-3">
             <div className="flex items-center">
                 <img src={soarLogo} className="logo mb-5 mr-2" alt="Soar logo" />
-                <h2 className="text-2xl font-bold text-[#343C6A] mb-4">Soar Task</h2>
+                <h2 className="text-sm lg:text-2xl md:text-xl font-bold text-[#343C6A] mb-4">Soar Task</h2>
             </div>
             <button className="md:hidden" onClick={() => setIsSidebarOpen(false)}>
                 <img src={closeIcon} alt="Close" />
