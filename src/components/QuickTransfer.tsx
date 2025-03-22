@@ -6,9 +6,9 @@ import WorkMan from "../assets/workmanAvatar.svg";
 
 const QuickTransfer = () => {
   const contacts = [
-    { id: 1, name: "John Doe", avatar: Livia },
-    { id: 2, name: "Jane Smith", avatar: Randy },
-    { id: 3, name: "Chris Johnson", avatar: WorkMan },
+    { id: 1, name: "Livia Bator", position:"CEO", avatar: Livia },
+    { id: 2, name: "Randy Press", position:"Director", avatar: Randy },
+    { id: 3, name: "Workman", position:"Designer", avatar: WorkMan },
   ];
 
   const [selectedContact, setSelectedContact] = useState<{ id: number; name: string; avatar: string } | null>(null);
@@ -24,7 +24,7 @@ const QuickTransfer = () => {
       <div className="recent-transaction">
         <h2 className="text-lg font-semibold mb-4">Quick Transfer</h2>
       </div>
-      <div className="bg-white p-6 rounded-lg shadow-md flex">
+      <div className="bg-white p-6 rounded-lg flex">
         <div className="contacts">
           <div className="flex gap-4 mb-4">
             {contacts.map((contact) => (
@@ -37,6 +37,7 @@ const QuickTransfer = () => {
               >
                 <img src={contact.avatar} alt={contact.name} className="w-10 h-10 rounded-full" />
                 <p className="text-sm mt-2">{contact.name}</p>
+                <p className="text-xs text-gray-500">{contact.position}</p>
               </button>
             ))}
           </div>

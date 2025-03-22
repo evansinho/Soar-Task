@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import navSettingIcon from "../assets/navSetting.svg";
 import notificationIcon from "../assets/notification.svg";
 import profileIcon from "../assets/profileIcon.svg";
@@ -27,7 +27,9 @@ const Navbar = () => {
               className="lg:p-3 md:p-2 w-full md:w-48 lg:w-64 text-lg md:text-sm sm:text-sm rounded-full bg-[#F5F7FA] focus:outline-none focus:border-blue-500 text-center"
             />
           </div>
-          <img src={navSettingIcon} className="logo hidden lg:block md:block md:w-10 md:h-10" alt="NavSetting logo" />
+          <Link to="/settings">
+            <img src={navSettingIcon} className="logo hidden lg:block md:block md:w-10 md:h-10" alt="NavSetting logo" />
+          </Link>
           <img src={notificationIcon} className="logo hidden lg:block md:block md:w-10 md:h-10" alt="Notification logo" />
           <img src={profileIcon} className="logo rounded-full lg:w-14 lg:h-14 md:w-10 md:h-10 w-8 h-8" alt="Profile logo" />
         </div>
