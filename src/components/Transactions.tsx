@@ -15,7 +15,7 @@ const Transactions = () => {
         <h2 className="text-lg text-[#343C6A] font-semibold mb-4">Recent Transactions</h2>
       </div>
       <div className="bg-white p-3 rounded-2xl shadow-md">
-        <ul className="space-y-2">
+        <ul className="space-y-2 p-1">
           {transactions.map((tx) => (
             <li key={tx.id} className="flex justify-between pb-1">
               <img src={tx.imgSrc} alt={tx.imgAlt} />

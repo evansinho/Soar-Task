@@ -21,16 +21,24 @@ const Dashboard = () => {
       </div>
 
       {/* Charts & Statistics Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        <WeeklyActivity />
-        <ExpenseStatistics />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+        <div className="lg:col-span-2 space-y-6">
+          <WeeklyActivity />
+        </div>
+        <div className="space-y-6">
+          <ExpenseStatistics />
+        </div>
       </div>
 
       {/* Bottom Section: Quick Transfer & Balance History */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        <QuickTransfer />
-        <BalanceHistory />
-      </div>  
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+        <div className="space-y-6">
+          <QuickTransfer />
+        </div>
+        <div className="lg:col-span-2 space-y-6">
+          <BalanceHistory />
+        </div>
+      </div>
     </div>
   );
 };
