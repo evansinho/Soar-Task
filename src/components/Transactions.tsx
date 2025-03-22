@@ -1,13 +1,14 @@
-import depositIcon from "../assets/deposits.svg";
-import paypalIcon from "../assets/paypalIcon.svg";
-import dollarsIcon from "../assets/dollarsIcon.svg"
+import { useEffect } from "react";
+import useStore from "../store/useStore";
 
 const Transactions = () => {
-  const transactions = [
-    { id: 1, name: "Deposit from my Card", date: "25 Jan 2021", amount: "-$850", imgSrc: depositIcon, imgAlt: "Deposit Icon" },
-    { id: 2, name: "Deposit PayPal", date: "25 Jan 2021", amount: "+$1,200", imgSrc: paypalIcon, imgAlt: "PayPal Icon" },
-    { id: 3, name: "Jeni Wilson", date: "21 Jan 2021", amount: "+$5,400", imgSrc: dollarsIcon, imgAlt: "Dollars Icon" },
-  ];
+  const { dashboard, fetchDashboardData } = useStore();
+
+    useEffect(() => {
+      fetchDashboardData();
+  }, [fetchDashboardData]);
+  
+    if (!dashboard) return null;
 
   return (
     <>
@@ -16,7 +17,7 @@ const Transactions = () => {
       </div>
       <div className="bg-white p-3 rounded-2xl shadow-md">
         <ul className="space-y-2 p-1">
-          {transactions.map((tx) => (
+          {dashboard.transactions.map((tx) => (
             <li key={tx.id} className="flex justify-between pb-1">
               <img src={tx.imgSrc} alt={tx.imgAlt} />
               <div className="text-left">

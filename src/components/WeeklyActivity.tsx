@@ -1,16 +1,16 @@
+import { useEffect } from "react";
+import useStore from "../store/useStore";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-const data = [
-  { day: "Sat", deposit: 300, withdraw: 100 },
-  { day: "Sun", deposit: 400, withdraw: 200 },
-  { day: "Mon", deposit: 500, withdraw: 300 },
-  { day: "Tue", deposit: 200, withdraw: 100 },
-  { day: "Wed", deposit: 600, withdraw: 400 },
-  { day: "Thu", deposit: 700, withdraw: 500 },
-  { day: "Fri", deposit: 450, withdraw: 250 },
-];
-
 const WeeklyActivity = () => {
+  const { dashboard, fetchDashboardData } = useStore();
+
+  useEffect(() => {
+    fetchDashboardData();
+}, [fetchDashboardData]);
+
+  if (!dashboard) return null;
+
   return (
       <>
         <div className="weekly-activity">
@@ -18,7 +18,7 @@ const WeeklyActivity = () => {
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md">
           <ResponsiveContainer width="100%" height={250}>
-            <BarChart data={data}>
+            <BarChart data={dashboard.weeklyActivity}>
               <XAxis dataKey="day" />
               <YAxis />
               <Tooltip />

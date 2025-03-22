@@ -1,15 +1,16 @@
+import { useEffect } from "react";
+import useStore from "../store/useStore";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-const data = [
-  { month: "Jan", balance: 5000 },
-  { month: "Feb", balance: 4800 },
-  { month: "Mar", balance: 5200 },
-  { month: "Apr", balance: 5100 },
-  { month: "May", balance: 5300 },
-  { month: "Jun", balance: 5500 },
-];
-
 const BalanceHistory = () => {
+  const { dashboard, fetchDashboardData } = useStore();
+    useEffect(() => {
+      fetchDashboardData();
+  }, [fetchDashboardData]);
+
+  if (!dashboard) return null;
+  const data = dashboard.balanceHistory;
+  console.log(data);
   return (
     <>
       <div className="recent-transaction">

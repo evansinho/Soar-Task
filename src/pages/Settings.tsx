@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useStore from "../store/useStore";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -25,10 +26,33 @@ const schema = yup.object().shape({
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("profile");
   const [profilePic, setProfilePic] = useState<string | ArrayBuffer | null>(null);
+  const { user, fetchUserData } = useStore();
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  useEffect(() => {
+    fetchUserData();
+  }, [fetchUserData]);
+
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    if (user) {
+      setValue("fullName", user.name);
+      setValue("userName", user.userName as unknown as string);
+      setValue("email", user.email);
+      setValue("dob", new Date(user.dob));
+      setValue("address", user.presentAddress);
+      setValue("address", user.permanentAddress);
+      setValue("city", user.city);
+      setValue("postcode", user.postalCode);
+      setValue("country", user.country);
+      setValue("notifications", !!user.notifications);
+      setValue("darkMode", !!user.darkMode);
+      setValue("twoFactorAuth", !!user.twoFactorAuth);
+      setProfilePic(user.profilePic as unknown as string | ArrayBuffer | null);
+    }
+  }, [user, setValue]);
 
   // Handle Profile Picture Upload
   const onDrop = (acceptedFiles: File[]) => {
@@ -104,7 +128,7 @@ const Settings = () => {
                     type="text"
                     {...register("fullName")}
                     placeholder="Charlene Reed"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-gray-300"
                   />
                   <p className="text-red-500 mt-1">{errors.fullName?.message}</p>
                 </div>
@@ -115,7 +139,7 @@ const Settings = () => {
                     type="text"
                     {...register("userName")}
                     placeholder="Charlene Reed"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-gray-300"
                   />
                   <p className="text-red-500 mt-1">{errors.userName?.message}</p>
                 </div>
@@ -126,7 +150,7 @@ const Settings = () => {
                     type="email"
                     {...register("email")}
                     placeholder="charlenereed@gmail.com"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-gray-300"
                   />
                   <p className="text-red-500 mt-1">{errors.email?.message}</p>
                 </div>
@@ -137,7 +161,7 @@ const Settings = () => {
                     type="password"
                     {...register("password")}
                     placeholder="**********"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-gray-300"
                   />
                   <p className="text-red-500 mt-1">{errors.password?.message}</p>
                 </div>
@@ -148,7 +172,7 @@ const Settings = () => {
                     type="date"
                     {...register("dob")}
                     placeholder="25 January 1990"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-gray-300"
                   />
                   <p className="text-red-500 mt-1">{errors.dob?.message}</p>
                 </div>
@@ -159,7 +183,7 @@ const Settings = () => {
                     type="text"
                     {...register("address")}
                     placeholder="San Jose, California, USA"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-gray-600"
                   />
                   <p className="text-red-500 mt-1">{errors.address?.message}</p>
                 </div>
@@ -170,7 +194,7 @@ const Settings = () => {
                     type="text"
                     {...register("address")}
                     placeholder="San Jose, California, USA"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-gray-300"
                   />
                   <p className="text-red-500 mt-1">{errors.address?.message}</p>
                 </div>
@@ -181,7 +205,7 @@ const Settings = () => {
                     type="text"
                     {...register("city")}
                     placeholder="San Jose"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-gray-300"
                   />
                   <p className="text-red-500 mt-1">{errors.city?.message}</p>
                 </div>
@@ -192,7 +216,7 @@ const Settings = () => {
                     type="text"
                     {...register("postcode")}
                     placeholder="45962"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-gray-300"
                   />
                   <p className="text-red-500 mt-1">{errors.postcode?.message}</p>
                 </div>
@@ -203,7 +227,7 @@ const Settings = () => {
                     type="text"
                     {...register("country")}
                     placeholder="USA"
-                    className="w-full p-3 border rounded-lg"
+                    className="w-full p-3 border rounded-lg text-gray-300"
                   />
                   <p className="text-red-500 mt-1">{errors.country?.message}</p>
                 </div>
@@ -233,7 +257,7 @@ const Settings = () => {
                   type="password"
                   {...register("password")}
                   placeholder="**********"
-                  className="w-full p-3 border rounded-lg"
+                  className="w-full p-3 border rounded-lg text-gray-300"
                 />
                 <p className="text-red-500 mt-1">{errors.password?.message}</p>
               </div>
