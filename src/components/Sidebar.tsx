@@ -49,7 +49,7 @@ const Sidebar = () => {
       <button className="md:hidden p-4 fixed top-4 left-4" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
         <img src={hamburgerIcon} alt="Menu" />
       </button>
-      <aside className={`w-64 h-screen border border-gray-200 border-t-0 bg-white text-white p-6 fixed md:relative ${isSidebarOpen ? 'block' : 'hidden'} md:block`} style={{zIndex: 1000 }}>
+      <aside className={`md:w-50 lg:w-64 border border-gray-200 border-t-0 bg-white text-white p-6 fixed md:relative ${isSidebarOpen ? 'block' : 'hidden'} md:block`} style={{zIndex: 1000 }}>
         <div className="flex items-center justify-between p-1.5 mb-3">
             <div className="flex items-center">
                 <img src={soarLogo} className="logo mb-5 mr-2" alt="Soar logo" />
@@ -59,7 +59,7 @@ const Sidebar = () => {
                 <img src={closeIcon} alt="Close" />
             </button>
         </div>
-        <nav className="flex flex-col space-y-4 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 100px)' }}>
+        <nav className="flex flex-col space-y-4">
           {navLinks.map((link, index) => (
             <NavLink
               key={index}
