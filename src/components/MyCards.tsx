@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 import useStore from "../store/useStore";
 
 const MyCards = () => {
@@ -15,11 +15,11 @@ const MyCards = () => {
     <div className="w-full">
       <div className="flex justify-between items-center">
         <h2 className="text-lg md:text-xl lg:text-2xl text-[#343C6A] font-semibold mb-4">My Cards</h2>
-        <Link to="/#" className="text-[#343C6A] text-sm md:text-base lg:text-lg">See All</Link>
+        <Link to="/#" className="text-[#343C6A] text-sm md:text-base lg:text-lg" aria-label="See All Cards">See All</Link>
       </div>
       <div className="flex align-center w-full gap-1 md:gap-1 lg:gap-2 xl:gap-8">
         {dashboard.cards.map((card) => (
-          <div key={card.id} className={`p-3 md:p-4 lg:p-5 rounded-3xl flex flex-col ${card.textColor} border border-gray-300 flex-grow`} style={{ background: card.bgColor }}>
+          <div key={card.id} className={`p-3 md:p-4 lg:p-5 rounded-3xl flex flex-col ${card.textColor} border border-gray-300 flex-grow`} style={{ background: card.bgColor }} aria-label={`Card ending in ${card.number.slice(-4)}`}>
               <div className="card-top-details flex justify-between items-center">
                 <div className="balance">
                   <p className="text-xs md:text-sm lg:text-sm">Balance</p>
@@ -48,4 +48,4 @@ const MyCards = () => {
   );
 };
 
-export default MyCards;
+export default memo(MyCards);

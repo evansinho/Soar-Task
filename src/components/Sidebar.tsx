@@ -12,6 +12,7 @@ import econometricsIcon from '../assets/econometricsIcon.svg';
 import settingsIcon from '../assets/settingsIcon.svg';
 import hamburgerIcon from '../assets/hamburgerIcon.svg';
 import closeIcon from '../assets/hamburgerIcon.svg';
+import React from "react";
 
 const navLinks = [
   { to: "/dashboard", icon: homeIcon, label: "Dashboard" },
@@ -33,20 +34,20 @@ interface NavLinkProps {
   onClick: () => void;
 }
 
-const NavLink = ({ to, icon, label, active, onClick }: NavLinkProps) => (
-  <Link to={to} onClick={onClick} className={`flex items-center p-2 rounded ${active ? 'text-[#232323]' : 'text-[#B1B1B1]'} hover:bg-gray-700`}>
+const NavLink = React.memo(({ to, icon, label, active, onClick }: NavLinkProps) => (
+  <Link to={to} onClick={onClick} className={`flex items-center p-2 rounded ${active ? 'text-[#232323]' : 'text-[#B1B1B1]'} hover:bg-gray-700`} aria-label={label}>
     <img src={icon} className="logo mr-2 inline" alt={`${label} Icon`} />
     <span className="ml-2 text-sm md:text-sm lg:text-xl mt-1">{label}</span>
   </Link>
-);
+));
 
-const Sidebar = () => {
+const Sidebar = React.memo(() => {
   const [activeLink, setActiveLink] = useState("/dashboard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <>
-      <button className="md:hidden p-4 fixed top-4 left-4" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+      <button className="md:hidden p-4 fixed top-4 left-4" onClick={() => setIsSidebarOpen(!isSidebarOpen)} aria-label="Menu">
         <img src={hamburgerIcon} alt="Menu" />
       </button>
       <aside className={`md:w-50 lg:w-64 border border-gray-200 border-t-0 bg-white text-white p-6 fixed md:relative ${isSidebarOpen ? 'block' : 'hidden'} md:block`} style={{zIndex: 1000 }}>
@@ -55,7 +56,7 @@ const Sidebar = () => {
                 <img src={soarLogo} className="logo mb-5 mr-2" alt="Soar logo" />
                 <h2 className="text-sm lg:text-2xl md:text-xl font-bold text-[#343C6A] mb-4">Soar Task</h2>
             </div>
-            <button className="md:hidden" onClick={() => setIsSidebarOpen(false)}>
+            <button className="md:hidden" onClick={() => setIsSidebarOpen(false)} aria-label="Close">
                 <img src={closeIcon} alt="Close" />
             </button>
         </div>
@@ -75,6 +76,6 @@ const Sidebar = () => {
       </aside>
     </>
   );
-};
+});
 
 export default Sidebar;

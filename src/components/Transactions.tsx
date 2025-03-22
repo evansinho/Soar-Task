@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 import useStore from "../store/useStore";
 
 const Transactions = () => {
   const { dashboard, fetchDashboardData } = useStore();
 
-    useEffect(() => {
-      fetchDashboardData();
+  useEffect(() => {
+    fetchDashboardData();
   }, [fetchDashboardData]);
-  
-    if (!dashboard) return null;
+
+  if (!dashboard) return null;
 
   return (
     <>
@@ -35,4 +35,4 @@ const Transactions = () => {
   );
 };
 
-export default Transactions;
+export default memo(Transactions);

@@ -1,54 +1,98 @@
-# React + TypeScript + Vite
+# **Soar-Task**  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a **responsive finance dashboard and settings page** built using **React, React Router, Tailwind CSS, and Recharts**. It includes a dashboard with transaction history, analytics, and a settings page for user profile management.
 
-Currently, two official plugins are available:
+## **Live Demo** 🌍  
+🔗 **[Live App](https://your-live-app-url.com/)** (Replace with your actual deployed link)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## **Tech Stack**
+- **React** (with Vite for fast development)
+- **React Router** (for routing)
+- **Tailwind CSS** (for styling)
+- **Recharts** (for charts & graphs)
+- **React Hook Form + Yup** (for form validation)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## **Setup Instructions**
+
+### **1. Clone the Repository**
+```sh
+git clone https://github.com/evansinho/Soar-Task.git
+cd Soar-Task
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### **2. Install Dependencies**
+```sh
+npm install
 ```
+
+### **3. Start the Development Server**
+```sh
+npm run dev
+```
+This will start the app at `http://localhost:5173/` (or another available port).
+
+---
+
+## **Project Structure**
+```
+src/
+├── components/        # Reusable UI components
+│   ├── Sidebar.jsx    # Sidebar navigation
+│   ├── Navbar.jsx     # Top navbar
+│   ├── Card.jsx       # Reusable card component
+│   ├── Chart.jsx      # Chart components using Recharts
+│   ├── TransactionList.jsx # Recent transactions
+│   ├── QuickTransfer.jsx   # Transfer money section
+│
+├── pages/             # Main pages
+│   ├── Dashboard.jsx  # Dashboard UI
+│   ├── Settings.jsx   # Settings page UI
+│
+├── routes/            # React Router configuration
+│   ├── index.jsx      # App routes
+│
+├── assets/            # Icons, images, and assets
+├── styles/            # Global styles (if needed)
+├── utils/             # Helper functions
+└── App.jsx            # Main application entry
+```
+
+---
+
+## **Assumptions Made**
+1. **Routing**: The app uses **React Router** instead of Next.js for navigation.
+2. **API Data**: Initially, mock data is used for transactions, user details, and card information, though I simulated API call and populated the app with mock data.
+3. **Authentication**: This version does not include authentication but assumes a logged-in user.
+4. **Form Validation**: The settings page form uses **React Hook Form + Yup** for validation.
+5. **Responsiveness**: The UI is **fully responsive** for both desktop and mobile screens.
+
+---
+
+## **Deployment Instructions**
+To deploy the app on **Vercel**:
+1. Install Vercel CLI:
+   ```sh
+   npm install -g vercel
+   ```
+2. Deploy the app:
+   ```sh
+   vercel
+   ```
+   Follow the CLI instructions to set up the project.
+
+---
+
+## **To-Do (Future Enhancements)**
+- Connect with an **API** to fetch real-time user and transaction data.
+- Implement **authentication** and user session management.
+- Improve the **UI with animations** using Framer Motion.
+- Optimize the app for **better performance & accessibility**.
+
+---
+
+## **License**
+This project is open-source under the **MIT License**.
