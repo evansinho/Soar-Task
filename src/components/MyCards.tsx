@@ -37,7 +37,7 @@ const MyCards = () => {
   return (
     <div className="w-full">
       <div className="flex justify-between items-center">
-        <h2 className="text-lg md:text-xl lg:text-xl text-[#343C6A] font-semibold mb-4">My Cards</h2>
+        <h2 className="text-lg md:text-xl lg:text-2xl text-[#343C6A] font-semibold mb-4">My Cards</h2>
         <Link to="/#" className="text-[#343C6A] text-sm md:text-base lg:text-lg">See All</Link>
       </div>
       <div className="flex align-center w-full gap-1 md:gap-1 lg:gap-2 xl:gap-8">
