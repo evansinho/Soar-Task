@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import useStore from "../store/useStore";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -55,7 +55,7 @@ const Settings = () => {
   }, [user, setValue]);
 
   // Handle Profile Picture Upload
-  const onDrop = (acceptedFiles: File[]) => {
+  const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     if (file) {
       const reader = new FileReader();
@@ -64,12 +64,24 @@ const Settings = () => {
       };
       reader.readAsDataURL(file);
     }
-  };
+  }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: { "image/*": [] },
   });
+
+  const tabButtons = useMemo(() => (
+    ["profile", "preferences", "security"].map((tab) => (
+      <button
+        key={tab}
+        className={`px-4 py-2 ${activeTab === tab ? "border-b-2 border-black font-semibold" : "text-gray-600"}`}
+        onClick={() => setActiveTab(tab)}
+      >
+        {tab === "profile" ? "Edit Profile" : tab === "preferences" ? "Preferences" : "Security"}
+      </button>
+    ))
+  ), [activeTab]);
 
   const onSubmit = async (data: any) => {
     console.log("Submitting:", data, "Profile Picture:", profilePic);
@@ -86,15 +98,7 @@ const Settings = () => {
     <div className="p-7 md:p-10 bg-white rounded-2xl shadow-md  my-10 mx-12">
       {/* Tab Navigation */}
       <div className="flex border-b mb-6">
-        {["profile", "preferences", "security"].map((tab) => (
-          <button
-            key={tab}
-            className={`px-4 py-2 ${activeTab === tab ? "border-b-2 border-black font-semibold" : "text-gray-600"}`}
-            onClick={() => setActiveTab(tab)}
-          >
-            {tab === "profile" ? "Edit Profile" : tab === "preferences" ? "Preferences" : "Security"}
-          </button>
-        ))}
+        {tabButtons}
       </div>
 
       {/* Form Container */}
@@ -115,7 +119,7 @@ const Settings = () => {
                   {...getRootProps()}
                   className="cursor-pointer px-4 py-2 bg-gray-200 rounded-md text-sm text-gray-700"
                 >
-                  <input {...getInputProps()} />
+                  <input {...getInputProps()} aria-label="Upload New Profile Picture" />
                   Click to Upload New Picture
                 </div>
               </div>
@@ -123,111 +127,131 @@ const Settings = () => {
               {/* Form Fields */}
               <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Your Name</label>
+                  <label className="block text-sm font-medium mb-1" htmlFor="fullName">Your Name</label>
                   <input
                     type="text"
                     {...register("fullName")}
                     placeholder="Charlene Reed"
                     className="w-full p-3 border rounded-lg text-gray-300"
+                    id="fullName"
+                    aria-label="Full Name"
                   />
                   <p className="text-red-500 mt-1">{errors.fullName?.message}</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">User Name</label>
+                  <label className="block text-sm font-medium mb-1" htmlFor="userName">User Name</label>
                   <input
                     type="text"
                     {...register("userName")}
                     placeholder="Charlene Reed"
                     className="w-full p-3 border rounded-lg text-gray-300"
+                    id="userName"
+                    aria-label="User Name"
                   />
                   <p className="text-red-500 mt-1">{errors.userName?.message}</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Email</label>
+                  <label className="block text-sm font-medium mb-1" htmlFor="email">Email</label>
                   <input
                     type="email"
                     {...register("email")}
                     placeholder="charlenereed@gmail.com"
                     className="w-full p-3 border rounded-lg text-gray-300"
+                    id="email"
+                    aria-label="Email"
                   />
                   <p className="text-red-500 mt-1">{errors.email?.message}</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Password</label>
+                  <label className="block text-sm font-medium mb-1" htmlFor="password">Password</label>
                   <input
                     type="password"
                     {...register("password")}
                     placeholder="**********"
                     className="w-full p-3 border rounded-lg text-gray-300"
+                    id="password"
+                    aria-label="Password"
                   />
                   <p className="text-red-500 mt-1">{errors.password?.message}</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Date of Birth</label>
+                  <label className="block text-sm font-medium mb-1" htmlFor="dob">Date of Birth</label>
                   <input
                     type="date"
                     {...register("dob")}
                     placeholder="25 January 1990"
                     className="w-full p-3 border rounded-lg text-gray-300"
+                    id="dob"
+                    aria-label="Date of Birth"
                   />
                   <p className="text-red-500 mt-1">{errors.dob?.message}</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Present Address</label>
+                  <label className="block text-sm font-medium mb-1" htmlFor="presentAddress">Present Address</label>
                   <input
                     type="text"
                     {...register("address")}
                     placeholder="San Jose, California, USA"
                     className="w-full p-3 border rounded-lg text-gray-600"
+                    id="presentAddress"
+                    aria-label="Present Address"
                   />
                   <p className="text-red-500 mt-1">{errors.address?.message}</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Permanent Address</label>
+                  <label className="block text-sm font-medium mb-1" htmlFor="permanentAddress">Permanent Address</label>
                   <input
                     type="text"
                     {...register("address")}
                     placeholder="San Jose, California, USA"
                     className="w-full p-3 border rounded-lg text-gray-300"
+                    id="permanentAddress"
+                    aria-label="Permanent Address"
                   />
                   <p className="text-red-500 mt-1">{errors.address?.message}</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">City</label>
+                  <label className="block text-sm font-medium mb-1" htmlFor="city">City</label>
                   <input
                     type="text"
                     {...register("city")}
                     placeholder="San Jose"
                     className="w-full p-3 border rounded-lg text-gray-300"
+                    id="city"
+                    aria-label="City"
                   />
                   <p className="text-red-500 mt-1">{errors.city?.message}</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Postal Code</label>
+                  <label className="block text-sm font-medium mb-1" htmlFor="postcode">Postal Code</label>
                   <input
                     type="text"
                     {...register("postcode")}
                     placeholder="45962"
                     className="w-full p-3 border rounded-lg text-gray-300"
+                    id="postcode"
+                    aria-label="Postal Code"
                   />
                   <p className="text-red-500 mt-1">{errors.postcode?.message}</p>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Country</label>
+                  <label className="block text-sm font-medium mb-1" htmlFor="country">Country</label>
                   <input
                     type="text"
                     {...register("country")}
                     placeholder="USA"
                     className="w-full p-3 border rounded-lg text-gray-300"
+                    id="country"
+                    aria-label="Country"
                   />
                   <p className="text-red-500 mt-1">{errors.country?.message}</p>
                 </div>
@@ -238,13 +262,13 @@ const Settings = () => {
           {activeTab === "preferences" && (
             <>
               <div className="flex items-center">
-                <input type="checkbox" {...register("notifications")} className="mr-2" />
-                <label className="text-sm font-medium">Enable Notifications</label>
+                <input type="checkbox" {...register("notifications")} className="mr-2" id="notifications" aria-label="Enable Notifications" />
+                <label className="text-sm font-medium" htmlFor="notifications">Enable Notifications</label>
               </div>
 
               <div className="flex items-center">
-                <input type="checkbox" {...register("darkMode")} className="mr-2" />
-                <label className="text-sm font-medium">Enable Dark Mode</label>
+                <input type="checkbox" {...register("darkMode")} className="mr-2" id="darkMode" aria-label="Enable Dark Mode" />
+                <label className="text-sm font-medium" htmlFor="darkMode">Enable Dark Mode</label>
               </div>
             </>
           )}
@@ -252,19 +276,21 @@ const Settings = () => {
           {activeTab === "security" && (
             <>
               <div>
-                <label className="block text-sm font-medium mb-1">New Password</label>
+                <label className="block text-sm font-medium mb-1" htmlFor="newPassword">New Password</label>
                 <input
                   type="password"
                   {...register("password")}
                   placeholder="**********"
                   className="w-full p-3 border rounded-lg text-gray-300"
+                  id="newPassword"
+                  aria-label="New Password"
                 />
                 <p className="text-red-500 mt-1">{errors.password?.message}</p>
               </div>
 
               <div className="flex items-center">
-                <input type="checkbox" {...register("twoFactorAuth")} className="mr-2" />
-                <label className="text-sm font-medium">Enable Two-Factor Authentication</label>
+                <input type="checkbox" {...register("twoFactorAuth")} className="mr-2" id="twoFactorAuth" aria-label="Enable Two-Factor Authentication" />
+                <label className="text-sm font-medium" htmlFor="twoFactorAuth">Enable Two-Factor Authentication</label>
               </div>
             </>
           )}
@@ -273,6 +299,7 @@ const Settings = () => {
             <button
               type="submit"
               className="bg-black text-white p-3 rounded-lg w-full md:w-auto"
+              aria-label="Save Changes"
             >
               Save Changes
             </button>

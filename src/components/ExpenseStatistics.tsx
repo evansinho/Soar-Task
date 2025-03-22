@@ -1,5 +1,5 @@
 import useStore from "../store/useStore";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 const ExpenseStatistics = () => {
@@ -7,7 +7,9 @@ const ExpenseStatistics = () => {
 
   useEffect(() => {
     fetchDashboardData();
-}, [fetchDashboardData]);
+  }, [fetchDashboardData]);
+
+  const pieData = useMemo(() => dashboard?.expenseStats || [], [dashboard]);
 
   if (!dashboard) return null;
 
@@ -18,9 +20,9 @@ const ExpenseStatistics = () => {
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md">
         <ResponsiveContainer width="100%" height={250}>
-          <PieChart>
-            <Pie data={dashboard.expenseStats} dataKey="value" outerRadius={80} label>
-              {dashboard.expenseStats.map((entry, index) => (
+          <PieChart aria-label="Expense Statistics Pie Chart">
+            <Pie data={pieData} dataKey="value" outerRadius={80} label>
+              {pieData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
