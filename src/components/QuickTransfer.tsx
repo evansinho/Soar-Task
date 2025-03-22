@@ -1,18 +1,20 @@
 import { useState } from "react";
 import ArrowRight from "../assets/arrowRight.svg";
-import Livia from "../assets/liviaAvatar.svg";
-import Randy from "../assets/randyAvatar.svg";
-import WorkMan from "../assets/workmanAvatar.svg";
+import useStore from "../store/useStore";
+import { useEffect } from "react";
 
 const QuickTransfer = () => {
-  const contacts = [
-    { id: 1, name: "Livia Bator", position:"CEO", avatar: Livia },
-    { id: 2, name: "Randy Press", position:"Director", avatar: Randy },
-    { id: 3, name: "Workman", position:"Designer", avatar: WorkMan },
-  ];
+  const { dashboard, fetchDashboardData } = useStore();
+
+  useEffect(() => {
+    fetchDashboardData();
+}, [fetchDashboardData]);
 
   const [selectedContact, setSelectedContact] = useState<{ id: number; name: string; avatar: string } | null>(null);
   const [amount, setAmount] = useState("");
+
+  if (!dashboard) return null;
+  const contacts = dashboard.quickTransfer;
 
   const handleTransfer = () => {
     if (!selectedContact || !amount) return alert("Select a contact and enter an amount.");
