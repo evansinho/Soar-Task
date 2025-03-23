@@ -3,7 +3,7 @@
 This project is a **responsive finance dashboard and settings page** built using **React, React Router, Tailwind CSS, and Recharts**. It includes a dashboard with transaction history, analytics, and a settings page for user profile management.
 
 ## **Live Demo** 🌍  
-🔗 **[Live App](https://soar-task-ulp583dz2-evansinhos-projects.vercel.app/)**
+🔗 **[Live App](https://soar-task-liart.vercel.app/)**
 
 ---
 ## **Features**
@@ -114,7 +114,6 @@ If needed, rollback to the last successful deployment:
 vercel rollback
 ```
 
----
 
 ## **To-Do (Future Enhancements)**
 - Connect with an **API** to fetch real-time user and transaction data.
@@ -122,7 +121,6 @@ vercel rollback
 - Improve the **UI with animations** using Framer Motion.
 - Optimize the app for **better performance & accessibility**.
 
----
 
 ## **License**
 This project is open-source under the **MIT License**.
