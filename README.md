@@ -3,9 +3,15 @@
 This project is a **responsive finance dashboard and settings page** built using **React, React Router, Tailwind CSS, and Recharts**. It includes a dashboard with transaction history, analytics, and a settings page for user profile management.
 
 ## **Live Demo** 🌍  
-🔗 **[Live App](https://your-live-app-url.com/)** (Replace with your actual deployed link)
+🔗 **[Live App](https://soar-task-ulp583dz2-evansinhos-projects.vercel.app/)**
 
 ---
+## **Features**
+✅ Dashboard with financial insights  
+✅ Interactive charts for transaction trends  
+✅ Quick transfers and balance tracking  
+✅ User profile settings with edit functionality  
+✅ Responsive design for desktop & mobile 
 
 ## **Tech Stack**
 - **React** (with Vite for fast development)
@@ -83,6 +89,30 @@ To deploy the app on **Vercel**:
    vercel
    ```
    Follow the CLI instructions to set up the project.
+
+**Updating an Existing Deployment**
+If you've made changes and want to redeploy:
+
+Using GitHub (Auto Deploy)
+ ```sh
+git add .
+git commit -m "Updated dashboard features"
+git push origin main
+```
+Vercel will automatically deploy the latest changes.
+
+Manually Deploy via CLI
+
+```sh
+vercel --prod
+```
+
+Rolling Back to a Previous Version
+If needed, rollback to the last successful deployment:
+
+```sh
+vercel rollback
+```
 
 ---
 

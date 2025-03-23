@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDropzone } from "react-dropzone";
 import ProfilePic from "../assets/profileIcon.svg"
+import EditIcon from "../assets/editIcon.svg"
 
 const schema = yup.object().shape({
   fullName: yup.string().required("Full Name is required"),
@@ -75,7 +76,7 @@ const Settings = () => {
     ["profile", "preferences", "security"].map((tab) => (
       <button
         key={tab}
-        className={`px-4 py-2 ${activeTab === tab ? "border-b-2 border-black font-semibold" : "text-gray-600"}`}
+        className={`px-4 py-2 mx-2 ${activeTab === tab ? "border-b-2 border-black font-semibold" : "text-gray-600"}`}
         onClick={() => setActiveTab(tab)}
       >
         {tab === "profile" ? "Edit Profile" : tab === "preferences" ? "Preferences" : "Security"}
@@ -95,20 +96,20 @@ const Settings = () => {
   };
 
   return (
-    <div className="p-7 md:p-10 bg-white rounded-2xl shadow-md  my-10 mx-12">
+    <div className="p-4 md:p-6 bg-white rounded-2xl shadow-md  mt-8 mb-10 mx-12">
       {/* Tab Navigation */}
       <div className="flex border-b mb-6">
         {tabButtons}
       </div>
 
       {/* Form Container */}
-      <div className="space-y-6">
+      <div className="space-y-5">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 flex flex-col">
           {activeTab === "profile" && (
-            <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col mt-4 md:flex-row">
               {/* Profile Picture Upload */}
-              <div className="flex flex-col items-center md:mr-6">
-                <div className="w-24 h-24 mb-2 border-2 border-gray-300 rounded-full overflow-hidden">
+              <div className="flex flex-col items-center ml-4 md:mr-6">
+                <div className="w-24 h-24 mb-2 rounded-full overflow-hidden">
                   <img
                     src={typeof profilePic === "string" ? profilePic : ProfilePic}
                     alt="Profile"
@@ -117,22 +118,22 @@ const Settings = () => {
                 </div>
                 <div
                   {...getRootProps()}
-                  className="cursor-pointer px-4 py-2 bg-gray-200 rounded-md text-sm text-gray-700"
+                  className="cursor-pointer -mt-6 -mr-10"
                 >
                   <input {...getInputProps()} aria-label="Upload New Profile Picture" />
-                  Click to Upload New Picture
+                  <img src={EditIcon} alt="Edit" className="w-6 h-6" />
                 </div>
               </div>
 
               {/* Form Fields */}
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex-1 grid grid-cols-1 lg:ml-10 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="fullName">Your Name</label>
+                  <label className="block text-sm mb-1" htmlFor="fullName">Your Name</label>
                   <input
                     type="text"
                     {...register("fullName")}
                     placeholder="Charlene Reed"
-                    className="w-full p-3 border rounded-lg text-gray-300"
+                    className="w-full p-3 border rounded-xl text-gray-300"
                     id="fullName"
                     aria-label="Full Name"
                   />
@@ -140,12 +141,12 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="userName">User Name</label>
+                  <label className="block text-sm mb-1" htmlFor="userName">User Name</label>
                   <input
                     type="text"
                     {...register("userName")}
                     placeholder="Charlene Reed"
-                    className="w-full p-3 border rounded-lg text-gray-300"
+                    className="w-full p-3 border rounded-xl text-gray-300"
                     id="userName"
                     aria-label="User Name"
                   />
@@ -153,12 +154,12 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="email">Email</label>
+                  <label className="block text-sm mb-1" htmlFor="email">Email</label>
                   <input
                     type="email"
                     {...register("email")}
                     placeholder="charlenereed@gmail.com"
-                    className="w-full p-3 border rounded-lg text-gray-300"
+                    className="w-full p-3 border rounded-xl text-gray-300"
                     id="email"
                     aria-label="Email"
                   />
@@ -166,12 +167,12 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="password">Password</label>
+                  <label className="block text-sm mb-1" htmlFor="password">Password</label>
                   <input
                     type="password"
                     {...register("password")}
                     placeholder="**********"
-                    className="w-full p-3 border rounded-lg text-gray-300"
+                    className="w-full p-3 border rounded-xl text-gray-300"
                     id="password"
                     aria-label="Password"
                   />
@@ -179,12 +180,12 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="dob">Date of Birth</label>
+                  <label className="block text-sm mb-1" htmlFor="dob">Date of Birth</label>
                   <input
                     type="date"
                     {...register("dob")}
                     placeholder="25 January 1990"
-                    className="w-full p-3 border rounded-lg text-gray-300"
+                    className="w-full p-3 border rounded-xl text-gray-300"
                     id="dob"
                     aria-label="Date of Birth"
                   />
@@ -192,12 +193,12 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="presentAddress">Present Address</label>
+                  <label className="block text-sm mb-1" htmlFor="presentAddress">Present Address</label>
                   <input
                     type="text"
                     {...register("address")}
                     placeholder="San Jose, California, USA"
-                    className="w-full p-3 border rounded-lg text-gray-600"
+                    className="w-full p-3 border rounded-xl text-gray-600"
                     id="presentAddress"
                     aria-label="Present Address"
                   />
@@ -205,12 +206,12 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="permanentAddress">Permanent Address</label>
+                  <label className="block text-sm mb-1" htmlFor="permanentAddress">Permanent Address</label>
                   <input
                     type="text"
                     {...register("address")}
                     placeholder="San Jose, California, USA"
-                    className="w-full p-3 border rounded-lg text-gray-300"
+                    className="w-full p-3 border rounded-xl text-gray-300"
                     id="permanentAddress"
                     aria-label="Permanent Address"
                   />
@@ -218,12 +219,12 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="city">City</label>
+                  <label className="block text-sm mb-1" htmlFor="city">City</label>
                   <input
                     type="text"
                     {...register("city")}
                     placeholder="San Jose"
-                    className="w-full p-3 border rounded-lg text-gray-300"
+                    className="w-full p-3 border rounded-xl text-gray-300"
                     id="city"
                     aria-label="City"
                   />
@@ -231,12 +232,12 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="postcode">Postal Code</label>
+                  <label className="block text-sm mb-1" htmlFor="postcode">Postal Code</label>
                   <input
                     type="text"
                     {...register("postcode")}
                     placeholder="45962"
-                    className="w-full p-3 border rounded-lg text-gray-300"
+                    className="w-full p-3 border rounded-xl text-gray-300"
                     id="postcode"
                     aria-label="Postal Code"
                   />
@@ -244,12 +245,12 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="country">Country</label>
+                  <label className="block text-sm mb-1" htmlFor="country">Country</label>
                   <input
                     type="text"
                     {...register("country")}
                     placeholder="USA"
-                    className="w-full p-3 border rounded-lg text-gray-300"
+                    className="w-full p-3 border rounded-xl text-gray-300"
                     id="country"
                     aria-label="Country"
                   />
@@ -263,12 +264,12 @@ const Settings = () => {
             <>
               <div className="flex items-center">
                 <input type="checkbox" {...register("notifications")} className="mr-2" id="notifications" aria-label="Enable Notifications" />
-                <label className="text-sm font-medium" htmlFor="notifications">Enable Notifications</label>
+                <label className="text-sm" htmlFor="notifications">Enable Notifications</label>
               </div>
 
               <div className="flex items-center">
                 <input type="checkbox" {...register("darkMode")} className="mr-2" id="darkMode" aria-label="Enable Dark Mode" />
-                <label className="text-sm font-medium" htmlFor="darkMode">Enable Dark Mode</label>
+                <label className="text-sm" htmlFor="darkMode">Enable Dark Mode</label>
               </div>
             </>
           )}
@@ -276,12 +277,12 @@ const Settings = () => {
           {activeTab === "security" && (
             <>
               <div>
-                <label className="block text-sm font-medium mb-1" htmlFor="newPassword">New Password</label>
+                <label className="block text-sm mb-1" htmlFor="newPassword">New Password</label>
                 <input
                   type="password"
                   {...register("password")}
                   placeholder="**********"
-                  className="w-full p-3 border rounded-lg text-gray-300"
+                  className="w-full p-3 border rounded-xl text-gray-300"
                   id="newPassword"
                   aria-label="New Password"
                 />
@@ -290,7 +291,7 @@ const Settings = () => {
 
               <div className="flex items-center">
                 <input type="checkbox" {...register("twoFactorAuth")} className="mr-2" id="twoFactorAuth" aria-label="Enable Two-Factor Authentication" />
-                <label className="text-sm font-medium" htmlFor="twoFactorAuth">Enable Two-Factor Authentication</label>
+                <label className="text-sm" htmlFor="twoFactorAuth">Enable Two-Factor Authentication</label>
               </div>
             </>
           )}
@@ -298,10 +299,10 @@ const Settings = () => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-black text-white p-3 rounded-lg w-full md:w-auto"
+              className="bg-black text-white p-3 rounded-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mt-4 mb-4 hover:bg-gray-600 transition-colors duration-300"
               aria-label="Save Changes"
             >
-              Save Changes
+              Save
             </button>
           </div>
         </form>

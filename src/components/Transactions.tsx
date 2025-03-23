@@ -12,14 +12,14 @@ const Transactions = () => {
 
   return (
     <>
-      <div className="recent-transaction">
-        <h2 className="text-lg text-[#343C6A] font-semibold mb-4">Recent Transactions</h2>
+      <div className="recent-transaction mb-4 ml-4 md:ml-0">
+        <h2 className="text-lg text-[#343C6A] font-semibold">Recent Transactions</h2>
       </div>
-      <div className="bg-white p-3 rounded-2xl shadow-md">
-        <ul className="space-y-2 p-1">
+      <div className="bg-white p-4 md:rounded-2xl md:shadow-md max-w-screen-lg mx-auto">
+        <ul className="">
           {dashboard.transactions.map((tx) => (
             <li key={tx.id} className="flex justify-between pb-1">
-              <img src={tx.imgSrc} alt={tx.imgAlt} />
+              <img src={tx.imgSrc} alt={tx.imgAlt} className="w-10 h-10 md:w-12 md:h-12" />
               <div className="text-left">
                 <p className="font-medium">{tx.name}</p>
                 <p className="text-sm text-gray-500">{tx.date}</p>
