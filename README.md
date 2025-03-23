@@ -114,7 +114,6 @@ If needed, rollback to the last successful deployment:
 vercel rollback
 ```
 
----
 
 ## **To-Do (Future Enhancements)**
 - Connect with an **API** to fetch real-time user and transaction data.
@@ -122,7 +121,6 @@ vercel rollback
 - Improve the **UI with animations** using Framer Motion.
 - Optimize the app for **better performance & accessibility**.
 
----
 
 ## **License**
 This project is open-source under the **MIT License**.
