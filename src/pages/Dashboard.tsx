@@ -16,20 +16,18 @@ const MemoizedBalanceHistory = React.memo(BalanceHistory);
 
 const Dashboard = () => {
   return (
-    <div className="bg-gray-100 min-h-screen p-6">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Cards Section */}
+    <div className="bg-white lg:bg-gray-100 min-h-screen p-0 sm:p-4 lg:p-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+        {/* Top section: Cards Sectio & Transactions Section */}
         <div className="lg:col-span-2 space-y-6">
           <MemoizedMyCards />
         </div>
-
-        {/* Transactions Section */}
-        <div className="space-y-6">
+        <div className="space-y-4">
           <MemoizedTransactions />
         </div>
       </div>
 
-      {/* Charts & Statistics Section */}
+      {/* Middle Section: Charts & Statistics Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
         <div className="lg:col-span-2 space-y-6">
           <MemoizedWeeklyActivity />
@@ -40,11 +38,11 @@ const Dashboard = () => {
       </div>
 
       {/* Bottom Section: Quick Transfer & Balance History */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-        <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-6">
+        <div className="lg:col-span-2 space-y-6">
           <MemoizedQuickTransfer />
         </div>
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-3 space-y-6">
           <MemoizedBalanceHistory />
         </div>
       </div>

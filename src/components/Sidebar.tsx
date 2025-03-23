@@ -47,7 +47,7 @@ const Sidebar = React.memo(() => {
 
   return (
     <>
-      <button className="md:hidden p-4 fixed top-4 left-4" onClick={() => setIsSidebarOpen(!isSidebarOpen)} aria-label="Menu">
+      <button className="md:hidden p-4 fixed top-4 left-0" onClick={() => setIsSidebarOpen(!isSidebarOpen)} aria-label="Menu">
         <img src={hamburgerIcon} alt="Menu" />
       </button>
       <aside className={`md:w-50 lg:w-64 border border-gray-200 border-t-0 bg-white text-white p-6 fixed md:relative ${isSidebarOpen ? 'block' : 'hidden'} md:block`} style={{zIndex: 1000 }}>
